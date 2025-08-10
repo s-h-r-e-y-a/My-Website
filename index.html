@@ -1,38 +1,175 @@
-<!DOCTYPE html>
+<!--
+Save this file as `index.html` and put images in an `images/` folder next to it.
+Example image files expected:
+  - images/hero.png        (character/portrait on the left)
+  - images/scene-1.png     (3D desk / scene used in section)
+  - images/scene-2.png     (another artwork)
+
+How to use:
+ 1. Create a new Git repository and add this file + an `images/` folder with your assets.
+ 2. Open `index.html` in the browser to preview.
+ 3. (Optional) Add Netlify/GitHub Pages to publish.
+
+This is a single-file, responsive HTML/CSS/JS prototype that recreates the layout & feel
+of the screenshot you provided (dark theme, large character left, handwritten notes, and
+resource links). Replace placeholder images and copy to match your content.
+-->
+
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shreya's Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shreya — Portfolio</title>
+
+  <!-- Google fonts used for demo -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Rock+Salt&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f0f10; --card:#161617; --muted:#bdb6b0; --gold:#b7942f; --accent:#eab308;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Poppins',system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial; background:radial-gradient(ellipse at 10% 10%, rgba(255,255,255,0.02), transparent 5%), var(--bg); color:#eee; -webkit-font-smoothing:antialiased}
+
+    /* Top nav */
+    .nav{position:fixed;right:24px;top:18px;z-index:50;display:flex;gap:18px;font-size:14px}
+    .nav a{color:#ddd;text-decoration:none;opacity:0.85}
+    .nav a:hover{opacity:1}
+
+    /* Container */
+    .wrap{max-width:1100px;margin:84px auto;padding:0 20px}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:420px 1fr;gap:28px;align-items:center}
+    .hero-left{display:flex;justify-content:center}
+    .portrait{width:380px;height:380px;border-radius:14px;object-fit:cover;box-shadow:0 14px 40px rgba(0,0,0,0.7);border:1px solid rgba(255,255,255,0.04)}
+    .hero-right{padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:8px;}
+    .hello{font-family:'Rock Salt',cursive;font-size:36px;color:#ff9fd3;margin:0}
+    .title{font-size:20px;margin-top:8px;line-height:1.4;color:#f6e9d2}
+    .cta{display:inline-block;margin-top:20px;padding:10px 22px;background:var(--gold);color:#111;font-weight:700;border-radius:6px;text-decoration:none}
+
+    /* Sections (art panels) */
+    .panel{margin-top:36px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));border-radius:8px;display:flex;gap:18px;align-items:flex-start}
+    .panel img{width:320px;height:240px;object-fit:cover;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,0.7)}
+    .panel .notes{flex:1;padding:8px}
+    .note{background:transparent;margin:8px 0;padding:12px;border-radius:8px;font-size:14px;color:var(--muted)}
+
+    /* MacBook captions */
+    .caption{margin-top:6px;color:#9e9e9e;font-size:14px}
+
+    /* Left column mini-card */
+    .mini-card{display:flex;gap:14px;align-items:center;margin-top:18px}
+    .mini-card img{width:120px;border-radius:10px}
+    .links{display:flex;flex-direction:column;gap:8px}
+    .links a{color:#eee;text-decoration:none;background:rgba(255,255,255,0.02);padding:8px 10px;border-radius:6px;font-weight:600}
+
+    /* Footer */
+    footer{margin:48px 0 96px;color:#999;text-align:center}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .portrait{width:260px;height:260px}
+      .panel img{width:260px;height:200px}
+    }
+
+    /* playful handwritten badges */
+    .handwritten{font-family:'Rock Salt',cursive;color:#fff;padding:6px 10px;background:rgba(0,0,0,0.2);display:inline-block;border-radius:6px}
+
+    /* faint big watermark subheading like 'MacBook Pro 16" - 3' */
+    .watermark{opacity:0.3;font-size:20px;margin-top:12px;color:#cfcfcf}
+
+    /* small utility */
+    .muted{color:var(--muted)}
+  </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="intro.html">Intro</a></li>
-                <li><a href="work.html">Work</a></li>
-                <li><a href="life.html">Life</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <section id="hero">
-        <div class="hero-content">
-            <div class="text-content">
-                <h1>Hi!</h1>
-                <p>I am Shreya and this is a digital collection of my life.</p>
-                <p class="adventure-text">Are you ready for some adventure?</p>
-                <button class="cta-button">LET'S GO</button>
-            </div>
-            <div class="model-container">
-                <iframe title="A Questing Mouse" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" src="https://sketchfab.com/models/326494dbe70441d790fd74d06e5b5a39/embed" width="400" height="400"></iframe>
-            </div>
+  <nav class="nav">
+    <a href="#">Menu</a>
+    <a href="#intro">Intro</a>
+    <a href="#work">Work</a>
+    <a href="#life">Life</a>
+  </nav>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero" id="intro">
+      <div class="hero-left">
+        <!-- Replace with your character portrait -->
+        <img class="portrait" src="images/hero.png" alt="portrait"/>
+      </div>
+
+      <div class="hero-right">
+        <h1 class="hello">Hi!</h1>
+        <p class="title">I am <strong>Shreya</strong> and this is a digital collection of my life.</p>
+        <a class="cta" href="#work">LET'S GO</a>
+
+        <div class="watermark">MacBook Pro 16" - 3</div>
+
+        <div class="panel" style="margin-top:20px">
+          <img src="images/scene-1.png" alt="scene" />
+          <div class="notes">
+            <div class="note handwritten">I love making art while living life as an art itself.</div>
+            <div class="note muted">I am an economics undergraduate at IIT Kanpur. I love sunsets and reading books.</div>
+            <div class="note muted">I am a huge party person but I also love sunsets and reading books.</div>
+            <div class="note muted">I love hanging out, going on walks and long drives.</div>
+          </div>
         </div>
+
+        <div class="mini-card">
+          <img src="images/scene-2.png" alt="small scene"/>
+          <div class="links">
+            <a href="#">Resume</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Behance</a>
+          </div>
+        </div>
+
+        <div class="caption">MacBook Pro 16" - 2</div>
+      </div>
     </section>
-    
+
+    <!-- WORK GRID (three panels) -->
+    <section id="work" style="margin-top:36px">
+      <div class="panel">
+        <img src="images/scene-1.png" alt="work"/>
+        <div class="notes">
+          <h3 style="margin:0 0 8px">Work / Art</h3>
+          <p class="muted">Short caption about this piece. Mention your technique, year or context.</p>
+          <div style="margin-top:14px">
+            <span class="handwritten">I am a soon to be corporate girlish.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <img src="images/scene-2.png" alt="work2"/>
+        <div class="notes">
+          <h3 style="margin:0 0 8px">Another Project</h3>
+          <p class="muted">A few lines about this work and why it matters.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <img src="images/scene-1.png" alt="work3"/>
+        <div class="notes">
+          <h3 style="margin:0 0 8px">Misc</h3>
+          <p class="muted">Links to projects, competitions (e.g. 3rd place Photoshop battle) and events.</p>
+        </div>
+      </div>
+    </section>
+
     <footer>
-        <p>&copy; 2025 Shreya. All rights reserved.</p>
+      <p class="muted">Built with ❤️ — replace these assets with your originals and push to GitHub to publish.</p>
     </footer>
+  </main>
+
+  <script>
+    // small JS for keyboard-friendly focus (no heavy interactions required for prototype)
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'g') document.querySelector('.cta')?.scrollIntoView({behavior:'smooth'});
+    });
+  </script>
 </body>
 </html>
